@@ -7,7 +7,6 @@
     android:layout_marginBottom="8dp"
     android:background="#1E1E1E">
 
-    <!-- Обложка -->
     <ImageView
         android:id="@+id/ivCover"
         android:layout_width="match_parent"
@@ -35,12 +34,40 @@
         android:layout_marginStart="8dp"
         android:layout_marginBottom="8dp"/>
 
-    <Button
-        android:id="@+id/btnWatch"
+    <!-- Блок с лайками и просмотрами -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Смотреть"
-        android:backgroundTint="#9C27B0"
-        android:textColor="#FFFFFF" />
+        android:orientation="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center_vertical">
+
+        <Button
+            android:id="@+id/btnLike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="❤️ 0"
+            android:backgroundTint="#333333"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="16dp"/>
+
+        <TextView
+            android:id="@+id/tvViews"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="👁 0 просмотров"
+            android:textColor="#AAAAAA"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnWatch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Смотреть"
+            android:backgroundTint="#9C27B0"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
 
 </LinearLayout>
