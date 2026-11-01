@@ -16,7 +16,7 @@ class HomeActivity : AppCompatActivity() {
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
         fabAdd.setOnClickListener {
-            Toast.makeText(this, "Здесь будет экран добавления видео", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, AddActivity::class.java))
         }
 
         bottomNav.setOnItemSelectedListener { item ->
