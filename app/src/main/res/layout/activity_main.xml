@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="32dp">
+    android:padding="24dp"
+    android:background="#121212">
 
     <TextView
         android:layout_width="wrap_content"
@@ -12,47 +13,70 @@
         android:text="Вход в AnimeHub"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:layout_marginBottom="32dp"/>
+        android:textColor="#FFFFFF"
+        android:layout_marginBottom="40dp"/>
+
+    <!-- Подпись для номера -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Введите номер телефона"
+        android:textColor="#AAAAAA"
+        android:layout_marginBottom="8dp"/>
 
     <EditText
         android:id="@+id/etPhone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Номер телефона (например, 7999...)"
+        android:hint="7999..."
         android:inputType="phone"
-        android:layout_marginBottom="16dp"/>
+        android:textColor="#FFFFFF"
+        android:textColorHint="#555555"
+        android:backgroundTint="#9C27B0"
+        android:layout_marginBottom="24dp"/>
 
-    <EditText
-        android:id="@+id/etCode"
+    <!-- Подпись для кода -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Код из бота"
-        android:inputType="number"
-        android:layout_marginBottom="24dp"/>
+        android:text="Введите код из бота"
+        android:textColor="#AAAAAA"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Кубики для кода -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginBottom="32dp">
+
+        <EditText android:id="@+id/d1" style="@style/CodeBox" />
+        <EditText android:id="@+id/d2" style="@style/CodeBox" />
+        <EditText android:id="@+id/d3" style="@style/CodeBox" />
+        <EditText android:id="@+id/d4" style="@style/CodeBox" />
+        <EditText android:id="@+id/d5" style="@style/CodeBox" />
+        <EditText android:id="@+id/d6" style="@style/CodeBox" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Войти"
-        android:layout_marginBottom="32dp"/>
+        android:backgroundTint="#9C27B0"
+        android:textColor="#FFFFFF"
+        android:padding="16dp"
+        android:layout_marginBottom="24dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Нет кода? Перейдите в нашего бота, чтобы получить его:"
-        android:gravity="center"
-        android:layout_marginBottom="8dp"/>
-
-    <!-- Ссылка на бота -->
     <TextView
         android:id="@+id/tvBotLink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="👉 @AnimeHubHelpBot"
+        android:text="👉 Перейти в бота @AnimeHubHelpBot"
         android:textColor="#9C27B0"
         android:textStyle="bold"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:clickable="true"
         android:focusable="true"
         android:background="?attr/selectableItemBackground"/>
