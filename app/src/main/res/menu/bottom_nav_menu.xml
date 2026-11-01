@@ -5,6 +5,11 @@
         android:icon="@android:drawable/ic_menu_view"
         android:title="Главная" />
     <item
+        android:id="@+id/nav_empty"
+        android:title=""
+        android:enabled="false"
+        android:visible="false" />
+    <item
         android:id="@+id/nav_profile"
         android:icon="@android:drawable/ic_menu_myplaces"
         android:title="Профиль" />
