@@ -20,6 +20,15 @@ import org.json.JSONObject
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        
+        // Проверяем, сохранен ли уже вход
+        val session = SessionManager(this)
+        if (session.getPhone() != null) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+            return
+        }
+
         setContentView(R.layout.activity_main)
 
         val etPhone = findViewById<EditText>(R.id.etPhone)
@@ -27,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         val btnLogin = findViewById<Button>(R.id.btnLogin)
         val tvBotLink = findViewById<TextView>(R.id.tvBotLink)
 
-        // Ссылка на бота
         tvBotLink.setOnClickListener {
             val url = "https://t.me/AnimeHubHelpBot"
             val intent = Intent(Intent.ACTION_VIEW)
@@ -35,7 +43,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // Кнопка Войти
         btnLogin.setOnClickListener {
             val phone = etPhone.text.toString()
             val code = etCode.text.toString()
@@ -62,6 +69,8 @@ class MainActivity : AppCompatActivity() {
                     
                     runOnUiThread {
                         if (response.isSuccessful) {
+                            // СОХРАНЯЕМ ВХОД
+                            session.saveLogin(phone) 
                             Toast.makeText(this@MainActivity, "Успешный вход!", Toast.LENGTH_SHORT).show()
                             startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                             finish()
@@ -71,7 +80,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     runOnUiThread {
-                        Toast.makeText(this@MainActivity, "Ошибка сети: ${e.message}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this@MainActivity, "Ошибка сети", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

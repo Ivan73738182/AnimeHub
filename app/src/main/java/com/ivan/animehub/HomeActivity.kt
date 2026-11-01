@@ -1,5 +1,6 @@
 package com.ivan.animehub
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,21 +15,20 @@ class HomeActivity : AppCompatActivity() {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
-        // Нажатие на кнопку "Плюс"
         fabAdd.setOnClickListener {
             Toast.makeText(this, "Здесь будет экран добавления видео", Toast.LENGTH_SHORT).show()
-            // Позже здесь будет переход на AddVideoActivity
         }
 
-        // Переключение вкладок в нижнем меню
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    Toast.makeText(this, "Вы на главной", Toast.LENGTH_SHORT).show()
-                    true
-                }
+                R.id.nav_home -> true
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Здесь будет профиль", Toast.LENGTH_SHORT).show()
+                    // При нажатии на профиль пока просто выходим (для теста)
+                    Toast.makeText(this, "Выход...", Toast.LENGTH_SHORT).show()
+                    val session = SessionManager(this)
+                    session.logout()
+                    startActivity(Intent(this, MainActivity::class.java))
+                    finish()
                     true
                 }
                 else -> false
