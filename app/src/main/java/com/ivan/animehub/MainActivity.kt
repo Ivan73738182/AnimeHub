@@ -1,9 +1,11 @@
 package com.ivan.animehub
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.CoroutineScope
@@ -23,7 +25,17 @@ class MainActivity : AppCompatActivity() {
         val etPhone = findViewById<EditText>(R.id.etPhone)
         val etCode = findViewById<EditText>(R.id.etCode)
         val btnLogin = findViewById<Button>(R.id.btnLogin)
+        val tvBotLink = findViewById<TextView>(R.id.tvBotLink)
 
+        // Ссылка на бота
+        tvBotLink.setOnClickListener {
+            val url = "https://t.me/AnimeHubAuthBot"
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
+        }
+
+        // Кнопка Войти
         btnLogin.setOnClickListener {
             val phone = etPhone.text.toString()
             val code = etCode.text.toString()
@@ -33,7 +45,6 @@ class MainActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Отправляем запрос на наш сервер Waifly
             CoroutineScope(Dispatchers.IO).launch {
                 try {
                     val client = OkHttpClient()
@@ -52,7 +63,6 @@ class MainActivity : AppCompatActivity() {
                     runOnUiThread {
                         if (response.isSuccessful) {
                             Toast.makeText(this@MainActivity, "Успешный вход!", Toast.LENGTH_SHORT).show()
-                            // Переход на главный экран (пока просто заглушка)
                             startActivity(Intent(this@MainActivity, HomeActivity::class.java))
                             finish()
                         } else {
@@ -61,7 +71,7 @@ class MainActivity : AppCompatActivity() {
                     }
                 } catch (e: Exception) {
                     runOnUiThread {
-                        Toast.makeText(this@MainActivity, "Ошибка сети", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "Ошибка сети: ${e.message}", Toast.LENGTH_LONG).show()
                     }
                 }
             }

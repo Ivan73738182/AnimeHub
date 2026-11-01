@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Вход в AnimeHub"
-        android:textSize="24sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         android:layout_marginBottom="32dp"/>
 
@@ -34,5 +34,26 @@
         android:id="@+id/btnLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Войти" />
+        android:text="Войти"
+        android:layout_marginBottom="32dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Нет кода? Перейдите в нашего бота, чтобы получить его:"
+        android:gravity="center"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Ссылка на бота -->
+    <TextView
+        android:id="@+id/tvBotLink"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="👉 @AnimeHubAuthBot"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"/>
 </LinearLayout>
