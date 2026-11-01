@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         // Ссылка на бота
         tvBotLink.setOnClickListener {
-            val url = "https://t.me/AnimeHubAuthBot"
+            val url = "https://t.me/AnimeHubHelpBot"
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
