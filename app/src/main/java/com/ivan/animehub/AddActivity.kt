@@ -111,6 +111,7 @@ class AddActivity : AppCompatActivity() {
         val resJson = JSONObject(res.body?.string() ?: "")
         val uploadUrl = resJson.getString("upload_url")
         val publicUrl = resJson.getString("public_url")
+        val headersJson = resJson.getJSONObject("headers")
 
         val inputStream = contentResolver.openInputStream(uri)
         val tempFile = File(cacheDir, "temp_${type}")
@@ -119,18 +120,23 @@ class AddActivity : AppCompatActivity() {
         inputStream?.close()
         outputStream.close()
 
-        // Определяем точный тип файла
         val mediaTypeStr = if (type == "image") "image/jpeg" else "video/mp4"
         val mediaType = mediaTypeStr.toMediaType()
         val fileBody = tempFile.asRequestBody(mediaType)
         
-        val uploadReq = Request.Builder()
+        val uploadReqBuilder = Request.Builder()
             .url(uploadUrl)
             .put(fileBody)
-            .addHeader("Content-Type", mediaTypeStr) // Явно указываем тип
-            .build()
-            
-        val uploadRes = client.newCall(uploadReq).execute()
+        
+        val keys = headersJson.keys()
+        while (keys.hasNext()) {
+            val key = keys.next()
+            if (key.lowercase() != "content-length") {
+                uploadReqBuilder.addHeader(key, headersJson.getString(key))
+            }
+        }
+        
+        val uploadRes = client.newCall(uploadReqBuilder.build()).execute()
         
         if (!uploadRes.isSuccessful) {
             throw Exception("Не удалось загрузить $type в облако (Код: ${uploadRes.code})")
