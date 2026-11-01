@@ -1,5 +1,6 @@
 package com.ivan.animehub
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,11 +29,18 @@ class VideoAdapter(private val videos: List<Video>) : RecyclerView.Adapter<Video
         holder.tvTitle.text = video.title
         holder.tvDesc.text = video.description
 
-        // Загружаем картинку (нужна библиотека Glide, сейчас добавим)
-        // Glide.with(holder.itemView.context).load(video.image_url).into(holder.ivCover)
+        // Загружаем обложку с помощью Glide
+        Glide.with(holder.itemView.context)
+            .load(video.image_url)
+            .placeholder(android.R.drawable.ic_menu_gallery) // Заглушка, пока грузится
+            .into(holder.ivCover)
 
+        // Кнопка Смотреть
         holder.btnWatch.setOnClickListener {
-            // Здесь позже будет открытие плеера
+            val context = holder.itemView.context
+            val intent = Intent(context, PlayerActivity::class.java)
+            intent.putExtra("VIDEO_URL", video.video_url)
+            context.startActivity(intent)
         }
     }
 
