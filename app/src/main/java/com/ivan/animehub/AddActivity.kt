@@ -42,7 +42,6 @@ class AddActivity : AppCompatActivity() {
         val ivPreview = findViewById<ImageView>(R.id.ivPreview)
         val tvPlus = findViewById<TextView>(R.id.tvPlus)
 
-        // Нажатие на квадрат = выбор фото
         frameImage.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT)
             intent.type = "image/*"
@@ -120,13 +119,22 @@ class AddActivity : AppCompatActivity() {
         inputStream?.close()
         outputStream.close()
 
-        val mediaType = if (type == "image") "image/*".toMediaType() else "video/*".toMediaType()
+        // Определяем точный тип файла
+        val mediaTypeStr = if (type == "image") "image/jpeg" else "video/mp4"
+        val mediaType = mediaTypeStr.toMediaType()
         val fileBody = tempFile.asRequestBody(mediaType)
         
-        val uploadReq = Request.Builder().url(uploadUrl).put(fileBody).build()
+        val uploadReq = Request.Builder()
+            .url(uploadUrl)
+            .put(fileBody)
+            .addHeader("Content-Type", mediaTypeStr) // Явно указываем тип
+            .build()
+            
         val uploadRes = client.newCall(uploadReq).execute()
         
-        if (!uploadRes.isSuccessful) throw Exception("Не удалось загрузить $type в облако")
+        if (!uploadRes.isSuccessful) {
+            throw Exception("Не удалось загрузить $type в облако (Код: ${uploadRes.code})")
+        }
         
         tempFile.delete()
         return publicUrl
@@ -166,7 +174,6 @@ class AddActivity : AppCompatActivity() {
             if (uri != null) {
                 if (requestCode == 1001) {
                     selectedImageUri = uri
-                    // Показываем картинку в квадрате
                     findViewById<ImageView>(R.id.ivPreview).setImageURI(uri)
                     findViewById<TextView>(R.id.tvPlus).visibility = android.view.View.GONE
                     findViewById<TextView>(R.id.tvStatus).text = "Аватарка выбрана ✓"
