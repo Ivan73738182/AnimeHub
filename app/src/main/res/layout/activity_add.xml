@@ -42,12 +42,42 @@
             android:backgroundTint="#9C27B0"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Кнопка выбора аватарки -->
+        <!-- Квадрат для выбора фото -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Обложка (аватарка)"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
+
+        <FrameLayout
+            android:id="@+id/frameImage"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:background="#333333"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/ivPreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:id="@+id/tvPlus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+"
+                android:textSize="40sp"
+                android:textColor="#FFFFFF"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
         <Button
             android:id="@+id/btnPickImage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Выбрать аватарку"
+            android:text="Выбрать обложку"
             android:backgroundTint="#333333"
             android:textColor="#FFFFFF"
             android:layout_marginBottom="16dp"/>
