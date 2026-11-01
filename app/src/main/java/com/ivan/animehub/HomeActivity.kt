@@ -4,7 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class HomeActivity : AppCompatActivity() {
@@ -12,18 +12,25 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        val bottomNav = findViewById<BottomNavigationView>(R.id.bottomNav)
+        val bottomAppBar = findViewById<BottomAppBar>(R.id.bottomAppBar)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
+        // Добавляем вкладки в меню
+        bottomAppBar.replaceMenu(R.menu.bottom_nav_menu)
+
+        // Нажатие на кнопку "Плюс"
         fabAdd.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
 
-        bottomNav.setOnItemSelectedListener { item ->
+        // Переключение вкладок
+        bottomAppBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> true
+                R.id.nav_home -> {
+                    Toast.makeText(this, "Вы на главной", Toast.LENGTH_SHORT).show()
+                    true
+                }
                 R.id.nav_profile -> {
-                    // При нажатии на профиль пока просто выходим (для теста)
                     Toast.makeText(this, "Выход...", Toast.LENGTH_SHORT).show()
                     val session = SessionManager(this)
                     session.logout()
