@@ -28,7 +28,6 @@ class ProfileActivity : AppCompatActivity() {
 
         val tvPhone = findViewById<TextView>(R.id.tvPhone)
         val btnLogout = findViewById<Button>(R.id.btnLogout)
-        val btnAdmin = findViewById<Button>(R.id.btnAdmin)
         val rvMyVideos = findViewById<RecyclerView>(R.id.rvMyVideos)
 
         val session = SessionManager(this)
@@ -42,10 +41,6 @@ class ProfileActivity : AppCompatActivity() {
 
         // Загружаем свои видео
         loadMyVideos(phone)
-
-        btnAdmin.setOnClickListener {
-            startActivity(Intent(this, AdminActivity::class.java))
-        }
 
         btnLogout.setOnClickListener {
             session.logout()
