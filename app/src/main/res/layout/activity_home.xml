@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#121212">
 
-    <!-- Контейнер для свайпа (обновления) -->
+    <!-- Контейнер для ленты видео со свайпом -->
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
@@ -14,7 +14,6 @@
         android:paddingBottom="80dp"
         android:clipToPadding="false">
 
-        <!-- Контейнер для ленты видео -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvVideos"
             android:layout_width="match_parent"
@@ -22,7 +21,7 @@
             
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <!-- Нижняя панель с вырезом под кнопку -->
+    <!-- Нижняя панель -->
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottomAppBar"
         android:layout_width="match_parent"
