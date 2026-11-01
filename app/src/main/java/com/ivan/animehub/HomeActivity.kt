@@ -15,27 +15,17 @@ class HomeActivity : AppCompatActivity() {
         val bottomAppBar = findViewById<BottomAppBar>(R.id.bottomAppBar)
         val fabAdd = findViewById<FloatingActionButton>(R.id.fabAdd)
 
-        // Добавляем вкладки в меню
         bottomAppBar.replaceMenu(R.menu.bottom_nav_menu)
 
-        // Нажатие на кнопку "Плюс"
         fabAdd.setOnClickListener {
             startActivity(Intent(this, AddActivity::class.java))
         }
 
-        // Переключение вкладок
         bottomAppBar.setOnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.nav_home -> {
-                    Toast.makeText(this, "Вы на главной", Toast.LENGTH_SHORT).show()
-                    true
-                }
+                R.id.nav_home -> true // Уже на главной
                 R.id.nav_profile -> {
-                    Toast.makeText(this, "Выход...", Toast.LENGTH_SHORT).show()
-                    val session = SessionManager(this)
-                    session.logout()
-                    startActivity(Intent(this, MainActivity::class.java))
-                    finish()
+                    startActivity(Intent(this, ProfileActivity::class.java))
                     true
                 }
                 else -> false

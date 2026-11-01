@@ -11,6 +11,7 @@
         
         <activity android:name=".HomeActivity" />
         <activity android:name=".AddActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".MainActivity" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
